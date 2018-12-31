@@ -14,20 +14,26 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class ContextExtension extends Extension
+class ContextExtension extends Extension implements PrependExtensionInterface
 {
     const ALIAS = 'dawbed_context_bundle';
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $container->setParameter('bundle_dir', dirname(__DIR__));
+        $loader = $this->prepareLoader($container);
+        $loader->load('services.yaml');
+    }
 
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $contextTypes = $this->getTypes($configs);
         $configs = $this->processConfiguration($configuration, $configs);
-        $container->setParameter('bundle_dir', dirname(__DIR__));
-        $loader = $this->prepareLoader($container);
-        $loader->load('services.yaml');
+        $this->prepareLoader($container);
         $this->prepareSupportService($contextTypes, $container);
         $this->prepareEntityService($configs['entities'], $container);
         $this->prepareDiscriminatorMapping($configs['entities'], $configs['discriminator_map'], $container);
@@ -59,7 +65,6 @@ class ContextExtension extends Extension
             ]
         ]));
     }
-
     private function prepareSupportService(array $types, ContainerBuilder $container): void
     {
         $container->setDefinition(SupportService::class, new Definition(SupportService::class, [
