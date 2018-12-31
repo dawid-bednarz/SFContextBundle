@@ -29,6 +29,7 @@ class ContextExtension extends Extension implements PrependExtensionInterface
 
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $container->setParameter('bundle_dir', dirname(__DIR__));
         $configuration = new Configuration();
         $contextTypes = $this->getTypes($configs);
         $configs = $this->processConfiguration($configuration, $configs);
