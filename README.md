@@ -10,7 +10,7 @@ class Context extends Base
 {
 }
 ```
-#### 2. Create status_bundle.yaml in your ~/config/packages directory
+#### 2. Create context_bundle.yaml in your ~/config/packages directory
 ```yaml
 dawbed_context_bundle:
     entities:

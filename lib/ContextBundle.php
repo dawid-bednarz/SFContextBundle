@@ -28,7 +28,6 @@ class ContextBundle extends Bundle
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/schema') => 'DawBed\PHPContext',
         );
-
         if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {
            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings));
         }
