@@ -1,0 +1,15 @@
+{
+    "name": "dawid-bednarz/sf-context-bundle",
+    "description": "Context logic for symfony",
+    "type": "project",
+    "require": {
+        "php": "^7.2",
+        "dawid-bednarz/php-context": "dev-master",
+        "dawid-bednarz/sf-component-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "DawBed\\ContextBundle\\": "lib"
+        }
+    }
+}
