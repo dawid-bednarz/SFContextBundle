@@ -65,6 +65,7 @@ class ContextExtension extends Extension implements PrependExtensionInterface
             ]
         ]));
     }
+
     private function prepareSupportService(array $types, ContainerBuilder $container): void
     {
         $container->setDefinition(SupportService::class, new Definition(SupportService::class, [
