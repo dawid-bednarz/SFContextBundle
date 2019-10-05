@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace DawBed\ContextBundle\DependencyInjection\Compiler;
 
-use DawBed\PHPContext\ContextInterface;
-use DawBed\ContextBundle\Service\EntityService;
+use DawBed\ContextBundle\Entity\AbstractContext;
+use DawBed\PHPClassProvider\ClassProvider;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -16,11 +16,10 @@ class DoctrineResolveTargetEntityPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $entityService = $container->get(EntityService::class);
         $definition = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
         $definition->addMethodCall('addResolveTargetEntity', [
-            ContextInterface::class,
-            $entityService->Context,
+            AbstractContext::class,
+            ClassProvider::get(AbstractContext::class),
             [],
         ]);
         $definition->addTag('doctrine.event_subscriber', ['connection' => 'default']);

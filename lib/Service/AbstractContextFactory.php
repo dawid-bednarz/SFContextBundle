@@ -16,7 +16,7 @@ abstract class AbstractContextFactory
     {
         $factory = $this->getFactories();
 
-        if (!$factory->offsetExists($key)) {
+        if (array_key_exists($key, $factory)) {
             throw new AbstractFactoryException ('Unknown Factory');
         }
         $model = new CreateModel($factory[$key]());
@@ -26,41 +26,9 @@ abstract class AbstractContextFactory
         return $model->getEntity();
     }
 
-    protected abstract function getFactories(): FactoryCollection;
+    protected abstract function getFactories(): array;
 
     protected abstract function getCreateService(): CreateServiceInterface;
-}
-
-class FactoryCollection implements \ArrayAccess
-{
-    private $factories;
-
-    public function append(int $type, \Closure $factory): FactoryCollection
-    {
-        $this->factories[$type] = $factory;
-
-        return $this;
-    }
-
-    public function offsetExists($offset): bool
-    {
-        return array_key_exists($offset, $this->factories);
-    }
-
-    public function offsetGet($offset): \Closure
-    {
-        return $this->factories[$offset];
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        $this->append($offset, $value);
-    }
-
-    public function offsetUnset($offset)
-    {
-        unset($this->factories[$offset]);
-    }
 }
 
 class AbstractFactoryException extends \Exception

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace DawBed\ContextBundle\Service;
 
-use DawBed\PHPContext\Model\CreateModel;
+use DawBed\ContextBundle\Model\CreateModel;
 use Doctrine\ORM\EntityManagerInterface;
 
 interface CreateServiceInterface

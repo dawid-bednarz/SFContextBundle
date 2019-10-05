@@ -10,6 +10,7 @@ namespace DawBed\ContextBundle\DependencyInjection;
 use DawBed\ContextBundle\EventListener\ContextDiscriminatorListener;
 use DawBed\ContextBundle\Service\EntityService;
 use DawBed\ContextBundle\Service\SupportService;
+use DawBed\PHPClassProvider\ClassProvider;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -35,7 +36,7 @@ class ContextExtension extends Extension implements PrependExtensionInterface
         $configs = $this->processConfiguration($configuration, $configs);
         $this->prepareLoader($container);
         $this->prepareSupportService($contextTypes, $container);
-        $this->prepareEntityService($configs['entities'], $container);
+        $this->prepareEntityProvider($configs['entities'], $container);
         $this->prepareDiscriminatorMapping($configs['entities'], $configs['discriminator_map'], $container);
     }
 
@@ -57,13 +58,11 @@ class ContextExtension extends Extension implements PrependExtensionInterface
         $container->setDefinition(ContextDiscriminatorListener::class, $listener);
     }
 
-    private function prepareEntityService(array $entities, ContainerBuilder $container): void
+    private function prepareEntityProvider(array $entities, ContainerBuilder $container): void
     {
-        $container->setDefinition(EntityService::class, new Definition(EntityService::class, [
-            [
-                'Context' => $entities['context'],
-            ]
-        ]));
+        foreach ($entities as $name => $class) {
+            ClassProvider::add($name, $class);
+        }
     }
 
     private function prepareSupportService(array $types, ContainerBuilder $container): void

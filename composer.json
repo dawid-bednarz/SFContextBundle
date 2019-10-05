@@ -5,7 +5,6 @@
   "require": {
     "php": "^7.2",
     "symfony/framework-bundle": "^4.1",
-    "dawid-bednarz/php-context": "dev-master",
     "dawid-bednarz/sf-component-bundle": "dev-master"
   },
   "autoload": {

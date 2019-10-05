@@ -26,7 +26,7 @@ class ContextBundle extends Bundle
     private function addRegisterMappingsPass(ContainerBuilder $container): void
     {
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/schema') => 'DawBed\PHPContext',
+            realpath(__DIR__ . '/Resources/config/schema') => 'DawBed\ContextBundle\Entity',
         );
         if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {
            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings));

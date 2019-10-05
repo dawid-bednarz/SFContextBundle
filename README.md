@@ -4,7 +4,7 @@
 ```php
 namespace App\Entity;
 
-use DawBed\PHPContext\Context as Base;
+use DawBed\ContextBundle\Entity\AbstractContext as Base;
 
 class Context extends Base
 {
@@ -13,8 +13,8 @@ class Context extends Base
 #### 2. Create context_bundle.yaml in your ~/config/packages directory
 ```yaml
 dawbed_context_bundle:
-    entities:
-      Context: 'App\Entity\Context'
+   entities:
+      DawBed\ContextBundle\Entity\AbstractContext: App\Entity\Context
 ```
 # CONFIGURATION
 #### Add your Context types (required)

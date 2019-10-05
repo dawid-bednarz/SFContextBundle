@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace DawBed\ContextBundle\DependencyInjection;
 
 use DawBed\ComponentBundle\Configuration\Entity;
+use DawBed\ContextBundle\Entity\AbstractContext;
 use DawBed\PHPContext\Context;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -24,7 +25,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root(ContextExtension::ALIAS);
 
         $entity = new Entity($rootNode);
-        $entity->new('context', Context::class);
+        $entity->new(AbstractContext::class, Context::class);
         $entity->end();
 
         $this->contextTypes($rootNode
