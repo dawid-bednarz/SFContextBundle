@@ -7,12 +7,13 @@ declare(strict_types=1);
 
 namespace DawBed\ContextBundle\Entity;
 
-abstract class AbstractContext implements ContextInterface
+class Context
 {
     protected $type;
     protected $name;
     protected $id;
     protected $discriminator;
+    protected $groups;
 
     public function getDiscriminator()
     {
@@ -42,20 +43,31 @@ abstract class AbstractContext implements ContextInterface
         return $this->name;
     }
 
-    public function setName(string $name): ContextInterface
+    public function setName(string $name): Context
     {
         $this->name = $name;
         return $this;
     }
 
-    public function getType(): int
+    public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType(int $type): ContextInterface
+    public function setType(string $type): Context
     {
         $this->type = $type;
+        return $this;
+    }
+
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
         return $this;
     }
 }

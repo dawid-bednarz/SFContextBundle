@@ -4,7 +4,7 @@
 ```php
 namespace App\Entity;
 
-use DawBed\ContextBundle\Entity\AbstractContext as Base;
+use DawBed\ContextBundle\Entity\Context as Base;
 
 class Context extends Base
 {
@@ -14,12 +14,20 @@ class Context extends Base
 ```yaml
 dawbed_context_bundle:
    entities:
-      DawBed\ContextBundle\Entity\AbstractContext: App\Entity\Context
+      DawBed\ContextBundle\Entity\Context: App\Entity\Context
 ```
 # CONFIGURATION
 #### Add your Context types (required)
 ```yaml
 dawbed_context_bundle:
    types:
-       registration: 1
+      registaration:
+         name: 'Registration'
+         groups: ['registration']
+      registarationConfirmationMail:
+         name: 'Send confirmation mail'
+         groups: ['registration']
 ```
+#COMMANDS
+
+`php bin/console dawbed:status:update` - run after add/update context in config file

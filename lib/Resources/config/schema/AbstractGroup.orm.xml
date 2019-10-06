@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <mapped-superclass name="DawBed\ContextBundle\Entity\AbstractGroup" table="context_group">
+        <id name="id" type="guid" column="id">
+            <generator strategy="UUID"/>
+        </id>
+        <field name="name" type="string" length="255" column="name" nullable="false"/>
+        <many-to-one field="context" target-entity="DawBed\ContextBundle\Entity\Context" fetch="LAZY" inversed-by="groups">
+            <join-columns>
+                <join-column name="context_id" nullable="false" referenced-column-name="id" on-delete="CASCADE"/>
+            </join-columns>
+        </many-to-one>
+    </mapped-superclass>
+</doctrine-mapping>

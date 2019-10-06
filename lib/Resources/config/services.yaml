@@ -6,3 +6,6 @@ services:
     DawBed\ContextBundle\:
         resource: '%bundle_dir%/*'
         exclude: '%bundle_dir%/{DependencyInjection}'
+    DawBed\ContextBundle\EventListener\MappingListener:
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
