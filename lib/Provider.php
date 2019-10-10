@@ -26,7 +26,7 @@ class Provider
         $this->entityManager = $entityManager;
     }
 
-    public function build(string $type): Context
+    public function get(string $type): Context
     {
         if (!array_key_exists($type, $this->types)) {
             throw new ContextBundleException(sprintf('"%s" is not supported. Before use declare it in configuration file', $type));

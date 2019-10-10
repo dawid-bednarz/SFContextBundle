@@ -3,6 +3,9 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="DawBed\ContextBundle\Entity\Context" table="context" inheritance-type="SINGLE_TABLE">
+        <indexes>
+            <index columns="type"></index>
+        </indexes>
         <discriminator-map>
             <discriminator-mapping value="basecontext" class="DawBed\ContextBundle\Entity\Context"/>
         </discriminator-map>
