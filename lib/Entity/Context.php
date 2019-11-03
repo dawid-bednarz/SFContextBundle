@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace DawBed\ContextBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Context
 {
     protected $type;
@@ -14,6 +16,11 @@ class Context
     protected $id;
     protected $discriminator;
     protected $groups;
+
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
     public function getDiscriminator()
     {
@@ -26,12 +33,12 @@ class Context
         return $this;
     }
 
-    public function getId():?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(int $id): Context
+    public function setId(string $id): Context
     {
         $this->id = $id;
 

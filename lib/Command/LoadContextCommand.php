@@ -43,14 +43,12 @@ class LoadContextCommand extends Command
 
         foreach ($this->provider->getData() as $type => $data) {
             $entity = $respository->findOneBy(['type' => $type]);
-
             if (is_null($entity)) {
                 $output->writeln(sprintf('Add "%s"', $type));
                 $entity = $this->getEntity();
             } else {
                 $output->writeln(sprintf('Update "%s"', $type));
             }
-
             $entity->setName($data['name']);
             $entity->setType($type);
             $this->addGroups($entity, $data['groups']);
@@ -74,7 +72,6 @@ class LoadContextCommand extends Command
             $criteria = Criteria::create();
             $criteria->where(Criteria::expr()->eq('name', $name));
             $group = $entity->getGroups()->matching($criteria);
-
             if ($group->count()) {
                 $group = $group->first();
             } else {
