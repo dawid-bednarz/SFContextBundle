@@ -9,7 +9,7 @@ namespace DawBed\ContextBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Context
+class Context implements ContextInterface
 {
     protected $type;
     protected $name;

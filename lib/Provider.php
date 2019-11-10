@@ -38,7 +38,7 @@ class Provider
         $entity = $repository->findOneBy(['type' => $type]);
 
         if (is_null($entity)) {
-            throw new ContextBundleException(sprintf('"%s" is not found in database update it by command %s', $type, LoadContextCommand::NAME));
+            throw new ContextBundleException(sprintf('"%s" is not found in database update it by command "%s"', $type, LoadContextCommand::NAME));
         }
 
         return $entity;
