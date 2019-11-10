@@ -7,6 +7,7 @@
 
 namespace DawBed\ContextBundle;
 
+use DawBed\ContextBundle\Command\LoadContextCommand;
 use DawBed\ContextBundle\Entity\Context;
 use DawBed\PHPClassProvider\ClassProvider;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -37,7 +38,7 @@ class Provider
         $entity = $repository->findOneBy(['type' => $type]);
 
         if (is_null($entity)) {
-            throw new ContextBundleException(sprintf('"%s" is not found in database update it by command', $type));
+            throw new ContextBundleException(sprintf('"%s" is not found in database update it by command %s', $type, LoadContextCommand::NAME));
         }
 
         return $entity;
