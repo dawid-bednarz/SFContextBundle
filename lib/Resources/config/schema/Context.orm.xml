@@ -10,8 +10,8 @@
             <discriminator-mapping value="basecontext" class="DawBed\ContextBundle\Entity\Context"/>
         </discriminator-map>
         <discriminator-column name="discriminator" type="string"></discriminator-column>
-        <id name="id" type="integer" column="id">
-            <generator strategy="IDENTITY"/>
+        <id name="id" type="guid" column="id">
+            <generator strategy="UUID"/>
         </id>
         <field name="type" type="string" length="50" nullable="false"/>
         <field name="name" type="string" length="255" column="name" nullable="false"/>

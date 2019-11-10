@@ -7,13 +7,12 @@
 
 namespace DawBed\ContextBundle;
 
+use DawBed\ContextBundle\Command\LoadContextCommand;
 use DawBed\ContextBundle\Entity\Context;
-use DawBed\ContextBundle\Service\CreateServiceInterface;
 use DawBed\PHPClassProvider\ClassProvider;
-use DawBed\PHPContext\ContextInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use DawBed\ContextBundle\Model\CreateModel;
+use Doctrine\ORM\QueryBuilder;
 
 class Provider
 {
@@ -39,10 +38,24 @@ class Provider
         $entity = $repository->findOneBy(['type' => $type]);
 
         if (is_null($entity)) {
-            throw new ContextBundleException(sprintf('"%s" is not found in database update it by command', $type));
+            throw new ContextBundleException(sprintf('"%s" is not found in database update it by command "%s"', $type, LoadContextCommand::NAME));
         }
 
         return $entity;
+    }
+
+    public function getGroupQueryBuilder(string $group): QueryBuilder
+    {
+        /**
+         * @var ServiceEntityRepository $repository
+         */
+        $repository = $this->entityManager->getRepository($this->getDiscriminatorName());
+
+        $qb = $repository->createQueryBuilder('c')
+            ->join('c.groups', 'groups', 'WITH', 'groups.name=:name')
+            ->setParameter('name', $group);
+
+        return $qb;
     }
 
     public function getData(): array
