@@ -50,6 +50,9 @@ class LoadContextCommand extends Command
                 $output->writeln(sprintf('Update "%s"', $type));
             }
             $entity->setName($data['name']);
+            if (array_key_exists('description', $data)) {
+                $entity->setDescription($data['description']);
+            }
             $entity->setType($type);
             $this->addGroups($entity, $data['groups']);
             $this->clearUnusedGroups($entity, $data['groups']);
@@ -66,7 +69,7 @@ class LoadContextCommand extends Command
         return new $entityClass;
     }
 
-    private function addGroups(Context $entity, array $groups) : void
+    private function addGroups(Context $entity, array $groups): void
     {
         foreach ($groups as $name) {
             $criteria = Criteria::create();

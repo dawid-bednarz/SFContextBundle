@@ -16,6 +16,7 @@ class Context implements ContextInterface
     protected $id;
     protected $discriminator;
     protected $groups;
+    protected $description;
 
     public function __construct()
     {
@@ -77,4 +78,16 @@ class Context implements ContextInterface
         $this->groups = $groups;
         return $this;
     }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): Context
+    {
+        $this->description = $description;
+        return $this;
+    }
+
 }
