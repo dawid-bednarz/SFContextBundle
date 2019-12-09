@@ -14,7 +14,8 @@
             <generator strategy="UUID"/>
         </id>
         <field name="type" type="string" length="50" nullable="false"/>
-        <field name="name" type="string" length="255" column="name" nullable="false"/>
+        <field name="name" type="string" length="80" nullable="false"/>
+        <field name="description" type="string" length="255" nullable="true"/>
         <unique-constraints>
             <unique-constraint columns="discriminator,type"></unique-constraint>
         </unique-constraints>
